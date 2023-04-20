@@ -1,4 +1,6 @@
 class Transaction < ApplicationRecord
-    belongs_to :sender, class_name: 'Account'
-    belongs_to :receiver, class_name: 'Account'
+    enum :transaction_type, { deposit: 0, withdraw: 1 }
+    
+    belongs_to :account
+
 end

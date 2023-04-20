@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_095401) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_19_233251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.integer "account_type", default: 0
+    t.float "balance", default: 0.0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,13 +24,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_095401) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.float "amount", null: false
+    t.integer "transaction_type", default: 0
+    t.float "amount", default: 0.0
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.float "amount"
     t.bigint "sender_id"
     t.bigint "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_transactions_on_receiver_id"
-    t.index ["sender_id"], name: "index_transactions_on_sender_id"
+    t.index ["receiver_id"], name: "index_transfers_on_receiver_id"
+    t.index ["sender_id"], name: "index_transfers_on_sender_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_095401) do
   end
 
   add_foreign_key "accounts", "users"
-  add_foreign_key "transactions", "accounts", column: "receiver_id"
-  add_foreign_key "transactions", "accounts", column: "sender_id"
+  add_foreign_key "transactions", "accounts"
+  add_foreign_key "transfers", "accounts", column: "receiver_id"
+  add_foreign_key "transfers", "accounts", column: "sender_id"
 end
