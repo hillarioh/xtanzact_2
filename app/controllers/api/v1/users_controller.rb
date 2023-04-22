@@ -4,12 +4,15 @@ class Api::V1::UsersController < ApplicationController
 
 
     def index 
-        @users = User.all
+        @users = User.where.not(id: @current_user.id)
+        render json: @users
     end
 
     def create
         @user = User.new(user_params)
         if @user.save
+            Account.create(user: @user)
+            Account.create(user: @user, account_type: 1)
             render json: @user, status: :created
         else
             render json: { errors: @user.errors.full_messages },
@@ -28,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
 
     def destroy
         @user.destroy
-    end
+    end    
 
     private
 
