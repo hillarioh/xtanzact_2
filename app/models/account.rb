@@ -8,5 +8,6 @@ class Account < ApplicationRecord
     has_many :sent_transfers, foreign_key: "sender_id", class_name: 'Transfer'
     has_many :received_transfers, foreign_key: "receiver_id", class_name: 'Transfer'
 
-    scope :current_account, -> (u_id) { where(account_type: 'current', user_id: u_id).limit(1) }
+    validates :balance, presence:true, numericality: { greater_than_or_equal_to: 0.0 }
+    validates :account_type, presence: true
 end

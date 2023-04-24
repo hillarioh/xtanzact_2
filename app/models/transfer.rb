@@ -5,6 +5,11 @@ class Transfer < ApplicationRecord
 
     after_create :reconcile_accounts
 
+    validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0.0 }
+
+    validates :sender_id, presence: true
+    validates :receiver_id, presence: true
+
     private
 
     def reconcile_accounts
