@@ -19,52 +19,52 @@ RSpec.describe "Accounts", type: :request do
         }
     end
 
-    # describe "GET /api/v1/accounts" do
-    #     before do
-    #         register_request "/api/v1/users", {user: user_params}
-    #         login_request '/login', login_params
-    #         get_request '/api/v1/accounts', json_body["token"]
-    #     end
+    describe "GET /api/v1/accounts" do
+        before do
+            register_request "/api/v1/users", {user: user_params}
+            login_request '/login', login_params
+            get_request '/api/v1/accounts', json_body["token"]
+        end
 
-    #     it "should respond with status 200" do
-    #         expect(response).to have_http_status(200)
-    #     end
+        it "should respond with status 200" do
+            expect(response).to have_http_status(200)
+        end
 
-    #     it "should return two accounts(savings and current)" do
-    #         expect(json_body.length).to eq(2)
-    #     end
-    # end
+        it "should return two accounts(savings and current)" do
+            expect(json_body.length).to eq(2)
+        end
+    end
 
-    # describe "Deposits" do
-    #     before do
-    #         register_request "/api/v1/users", {user: user_params}
-    #         login_request '/login', login_params
-    #     end
+    describe "Deposits" do
+        before do
+            register_request "/api/v1/users", {user: user_params}
+            login_request '/login', login_params
+        end
 
-    #     let(:transaction_params) do
-    #         {
-    #             amount: 10000.0,
-    #             account_id: Account.first.id,
-    #             transaction_type: "deposit"
-    #         }
-    #     end
+        let(:transaction_params) do
+            {
+                amount: 10000.0,
+                account_id: Account.first.id,
+                transaction_type: "deposit"
+            }
+        end
 
-    #     it "should return status code 201" do
-    #         post_request '/api/v1/accounts/transact',json_body["token"], {transaction: transaction_params}
-    #         expect(response).to have_http_status(201)          
-    #     end
+        it "should return status code 201" do
+            post_request '/api/v1/accounts/transact',json_body["token"], {transaction: transaction_params}
+            expect(response).to have_http_status(201)          
+        end
 
-    #     it "should return success message" do
-    #         post_request '/api/v1/accounts/transact',json_body["token"], {transaction: transaction_params}
-    #         expect(json_body["message"]).to eq("Transaction Successful")         
-    #     end
+        it "should return success message" do
+            post_request '/api/v1/accounts/transact',json_body["token"], {transaction: transaction_params}
+            expect(json_body["message"]).to eq("Transaction Successful")         
+        end
 
-    #     it "should update account balance" do
-    #         value = Account.first.balance.to_f
-    #         post_request '/api/v1/accounts/transact',json_body["token"], {transaction: transaction_params}
-    #         expect(Account.first.balance).to eq(value + 10000.0)          
-    #     end      
-    # end
+        it "should update account balance" do
+            value = Account.first.balance.to_f
+            post_request '/api/v1/accounts/transact',json_body["token"], {transaction: transaction_params}
+            expect(Account.first.balance).to eq(value + 10000.0)          
+        end      
+    end
 
     describe "Withdraw" do
         before do
