@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "5b6da36a-7053-4a10-9657-257ddf49afed",
+		"name": "Tranzact",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"first_name\": \"Hillary\",\n        \"last_name\": \"Okerio\",\n        \"email_address\": \"example@gmail.com\",\n        \"password\": \"qwerty12\",\n        \"password_confirmation\": \"qwerty12\",\n        \"tel_no\": \"07023478596\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/api/v1/users",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_address\": \"example@gmail.com\",\n    \"password\": \"qwerty12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/login",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE2ODQ2NDU5NzR9.AWL9DtgzvWkTFz_riTKUPOwj6bdjX92chlPoz-k2rqk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/api/v1/users",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transaction\": {\n        \"amount\": 10000.0,\n        \"account_id\": 1,\n        \"transaction_type\": \"deposit\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/api/v1/accounts/transact",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"transact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Money",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n        \"amount\": 10000.0,\n        \"user_id\": 1,\n        \"account_id\": 3\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/api/v1/accounts/transfer",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transaction\": {\n        \"amount\": 10000.0,\n        \"account_id\": 3,\n        \"transaction_type\": \"withdraw\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/api/v1/accounts/transact",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"accounts",
+								"transact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://wispy-moon-245.fly.dev/api/v1/transaction_history",
+							"protocol": "https",
+							"host": [
+								"wispy-moon-245",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transaction_history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODQ3NjE1OTJ9.3N8d5YmrX8WDx06UTQURf_iEB0Pcxj_Z85HLKS0b6r4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

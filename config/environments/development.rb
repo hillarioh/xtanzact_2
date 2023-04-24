@@ -56,8 +56,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.default_url_options = { 
-  :host => "wispy-moon-245.fly.dev", 
-  :protocol => "https"
+  # :host => "wispy-moon-245.fly.dev", 
+  :host => "localhost:3000", 
+  :protocol => "http"
   }
   config.action_mailer.smtp_settings = {   
     :address => "smtp.gmail.com",

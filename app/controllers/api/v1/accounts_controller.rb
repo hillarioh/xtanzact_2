@@ -37,6 +37,7 @@ class Api::V1::AccountsController < ApplicationController
                 details[:amount] = params[:amount]
                 details[:recipient] = "#{receiver.first_name} #{receiver.last_name}"
                 details[:account_no] = receiver_account.id
+                TransferMailer.with(transfer: @transfer).send_money.deliver_later
                 render json: {message: "Funds have been sent", transaction: details }, status: :created
             else
                 render json: { errors: @transfer.errors.full_messages },
